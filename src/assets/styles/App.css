@@ -1,0 +1,130 @@
+/* Nier Automata inspired design system */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap');
+
+:root {
+  --primary-bg: #f5f3f0;
+  --secondary-bg: #e8e5e1;
+  --dark-overlay: #2a2926;
+  --dark-accent: #1a1917;
+  --border-color: #3c3a37;
+  --text-primary: #2a2926;
+  --text-secondary: #5c5a57;
+  --text-muted: #8a8884;
+  --accent-primary: #7c7c7c;
+  --accent-secondary: #9c9c9c;
+  --success-color: #4a6741;
+  --warning-color: #6b5b47;
+  --error-color: #6b4747;
+  --shadow-light: rgba(42, 41, 38, 0.1);
+  --shadow-medium: rgba(42, 41, 38, 0.15);
+  --shadow-heavy: rgba(42, 41, 38, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 14px;
+  letter-spacing: 0.025em;
+  overflow-x: hidden;
+}
+
+/* Geometric grid background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle, var(--text-muted) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--primary-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 0;
+  box-shadow:
+    0 8px 32px var(--shadow-light),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Geometric accent lines */
+.app-container::before,
+.app-container::after {
+  content: '';
+  position: absolute;
+  background: var(--border-color);
+  opacity: 0.3;
+}
+
+.app-container::before {
+  top: 0;
+  left: 40px;
+  width: 1px;
+  height: 100%;
+}
+
+.app-container::after {
+  top: 40px;
+  right: 0;
+  width: 100%;
+  height: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+
+  .app-container {
+    border-radius: 0;
+    border: none;
+    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  body {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 0;
+  }
+
+  .app-container {
+    min-height: 100vh;
+    border: none;
+  }
+
+  body {
+    font-size: 12px;
+  }
+}

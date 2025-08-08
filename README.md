@@ -1,69 +1,80 @@
-# React + TypeScript + Vite
+# 🤖 Task Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-18-blue?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-4-purple?logo=vite&logoColor=white)
+![LocalStorage](https://img.shields.io/badge/LocalStorage-Persistence-green)
 
-Currently, two official plugins are available:
+A simple yet powerful client-side task management application built with **React** and **TypeScript**. This project demonstrates fundamental React concepts, including a component-based architecture, state management with hooks, and data persistence using the browser's `localStorage`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- **Add New Tasks:** Easily create new tasks with a simple input field.
+- **Toggle Completion:** Mark tasks as complete or incomplete with a single click.
+- **Delete Tasks:** Permanently remove tasks from your list.
+- **Persistent Data:** All your tasks are saved locally in your browser, so they remain even after you close the tab.
+- **Dynamic Stats:** A summary panel shows a real-time count of active, completed, and total tasks, as well as a progress percentage.
+- **Task Filtering:** Filter tasks to view all, only active, or only completed items.
+- **Clear Completed:** A dedicated button allows you to remove all completed tasks at once.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Getting Started
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+To run this project locally, follow these simple steps.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Make sure you have **Node.js** and **npm** (or Yarn) installed on your machine.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1.  Clone the repository:
+    ```bash
+    git clone <YOUR_REPOSITORY_URL>
+    cd <project_folder_name>
+    ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2.  Install the dependencies:
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  Start the development server:
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
+
+The application will be available at `http://localhost:5173` in your browser.
+
+## 📁 Project Structure
+
+The project structure follows a standard for React applications, making it easy to navigate and understand the codebase.
+
+src/
+├── assets/
+│   ├── components/       # Reusable React components
+│   ├── styles/           # CSS files for styling
+│   └── ...
+├── App.tsx               # Main application component and state manager
+├── main.tsx              # Entry point for the application
+└── ...
+
+
+## 🧠 How It Works
+
+- The **`App.tsx`** component serves as the main container and manages the global state of the todos using the `useState` hook.
+- The **`useEffect`** hook is used to synchronize the todo list with `localStorage`, ensuring that data is automatically saved and loaded.
+- The UI is broken down into smaller, more manageable components, such as **`Header`**, **`Stats`**, **`AddTodo`**, and **`TodoList`**.
+- The **`TodoList`** component manages its own filter state (`'all'`, `'active'`, `'completed'`) and renders the appropriate `TodoItem` components.
+- Each **`TodoItem`** handles the display of a single task and triggers functions passed down via props to update the global state when the task is changed or deleted.
+
+## 📄 License
+
+This project is intended for portfolio use and is available for study. Feel free to inspect, copy, and adapt the code for your own projects.
+
+-------------------
+
+"Glory to mankind"
