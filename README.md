@@ -7,6 +7,9 @@
 
 A simple yet powerful client-side task management application built with **React** and **TypeScript**. This project demonstrates fundamental React concepts, including a component-based architecture, state management with hooks, and data persistence using the browser's `localStorage`.
 
+## 🖼️ Screenshot  
+![Yorha Todo App Preview](src/assets/todo-screenshot.png)  
+
 ## ✨ Features
 
 - **Add New Tasks:** Easily create new tasks with a simple input field.
@@ -29,8 +32,8 @@ Make sure you have **Node.js** and **npm** (or Yarn) installed on your machine.
 
 1.  Clone the repository:
     ```bash
-    git clone <YOUR_REPOSITORY_URL>
-    cd <project_folder_name>
+    git clone https://github.com/momarinho/yorhatodoapp
+    cd yorha_todo_app
     ```
 
 2.  Install the dependencies:
