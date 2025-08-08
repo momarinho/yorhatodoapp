@@ -130,3 +130,18 @@
     justify-content: center;
   }
 }
+
+.todo-list-empty {
+  margin-top: 24px;
+}
+
+@media (max-width: 480px) {
+  .filter-buttons {
+    margin-bottom: 16px;
+  }
+  
+  .todo-list-empty {
+    margin-top: 16px;
+    padding: 40px 20px;
+  }
+}

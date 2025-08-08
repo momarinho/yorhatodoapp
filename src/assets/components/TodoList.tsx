@@ -12,6 +12,25 @@ interface TodoListProps {
 
 type FilterType = 'all' | 'active' | 'completed';
 
+interface FilterButtonsProps {
+  currentFilter: FilterType;
+  onFilterChange: (filter: FilterType) => void;
+}
+
+const FilterButtons: React.FC<FilterButtonsProps> = ({ currentFilter, onFilterChange }) => (
+  <div className="filter-buttons">
+    {(['all', 'active', 'completed'] as FilterType[]).map((filter) => (
+      <button
+        key={filter}
+        onClick={() => onFilterChange(filter)}
+        className={currentFilter === filter ? 'active' : ''}
+      >
+        {filter.charAt(0).toUpperCase() + filter.slice(1)}
+      </button>
+    ))}
+  </div>
+);
+
 const TodoList: React.FC<TodoListProps> = ({ todos, onToggle, onDelete }) => {
   const [filter, setFilter] = useState<FilterType>('all');
 
@@ -21,80 +40,56 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onToggle, onDelete }) => {
     return true;
   });
 
-  if (filteredTodos.length === 0) {
-    return (
-      <div className="todo-list-empty">
-        <FileText size={32} className="empty-icon" />
-        <h3>No tasks found</h3>
-        <p>Add a new task above to get started</p>
-        <div className="filter-buttons">
-          <button 
-            onClick={() => setFilter('all')} 
-            className={filter === 'all' ? 'active' : ''}
-          >
-            All
-          </button>
-          <button 
-            onClick={() => setFilter('active')} 
-            className={filter === 'active' ? 'active' : ''}
-          >
-            Active
-          </button>
-          <button 
-            onClick={() => setFilter('completed')} 
-            className={filter === 'completed' ? 'active' : ''}
-          >
-            Completed
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const emptyMessages = {
+    all: {
+      title: 'EMPTINESS RECOGNIZED',
+      description: 'CREATE NEW DIRECTIVE TO COMMENCE EXISTENCE'
+    },
+    active: {
+      title: 'STANDBY MODE ENGAGED',
+      description: 'ALL OBJECTIVES TERMINATED. OR... INITIATE NEW PROTOCOL'
+    },
+    completed: {
+      title: 'NO TERMINATION RECORDS',
+      description: 'FULFILL DIRECTIVES TO WITNESS THEIR END'
+    }
+  };
 
   return (
     <div className="todo-list">
-      <div className="todo-list-header">
-        <span className="list-title">
-          {filter === 'all' && 'All Tasks'}
-          {filter === 'active' && 'Active Tasks'}
-          {filter === 'completed' && 'Completed Tasks'}
-        </span>
-        <span className="task-count">
-          {filteredTodos.length} {filteredTodos.length === 1 ? 'item' : 'items'}
-        </span>
-      </div>
+      <FilterButtons currentFilter={filter} onFilterChange={setFilter} />
 
-      <div className="filter-buttons">
-        <button 
-          onClick={() => setFilter('all')} 
-          className={filter === 'all' ? 'active' : ''}
-        >
-          All
-        </button>
-        <button 
-          onClick={() => setFilter('active')} 
-          className={filter === 'active' ? 'active' : ''}
-        >
-          Active
-        </button>
-        <button 
-          onClick={() => setFilter('completed')} 
-          className={filter === 'completed' ? 'active' : ''}
-        >
-          Completed
-        </button>
-      </div>
-      
-      <div className="todo-items">
-        {filteredTodos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggle={onToggle}
-            onDelete={onDelete}
-          />
-        ))}
-      </div>
+      {filteredTodos.length === 0 ? (
+        <div className="todo-list-empty">
+          <FileText size={32} className="empty-icon" />
+          <h3>{emptyMessages[filter].title}</h3>
+          <p>{emptyMessages[filter].description}</p>
+        </div>
+      ) : (
+        <>
+          <div className="todo-list-header">
+            <span className="list-title">
+              {filter === 'all' && 'All Tasks'}
+              {filter === 'active' && 'Active Tasks'}
+              {filter === 'completed' && 'Completed Tasks'}
+            </span>
+            <span className="task-count">
+              {filteredTodos.length} {filteredTodos.length === 1 ? 'item' : 'items'}
+            </span>
+          </div>
+
+          <div className="todo-items">
+            {filteredTodos.map(todo => (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                onToggle={onToggle}
+                onDelete={onDelete}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
